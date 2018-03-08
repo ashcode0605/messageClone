@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+
+  {% if user.is_authenticated %}
+
+    {% include "messageApp/list_messages.html" with message_list=message_list title="Sent Items" %}
+
+  {% else %}
+
+  <p>You Must Be Login To Visit This Page</p>
+
+  {% endif %}
+
+{% endblock %}

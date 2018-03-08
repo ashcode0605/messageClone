@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% block body_block %}
+  <div class="container">
+      <div class="row">
+        <div class="col-sm-6 offset-sm-3 mt-5">
+
+          <h3 class="text-center">Register</h3>
+          <hr>
+
+          <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form userform %}
+            {% bootstrap_form userprofileform %}
+            <input class="btn btn-primary" type="submit" value="Register">
+        </div>
+      </div>
+  </div>
+{% endblock %}

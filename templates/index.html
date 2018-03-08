@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block head_block %}
+  <style media="screen">
+    
+  </style>
+{% endblock %}
+
+{% block extra_script %}
+  <script type="text/javascript">
+    console.log("Javascipt Loaded");
+  </script>
+{% endblock %}
+
+
+{% block body_block %}
+
+{% if user.is_authenticated %}
+
+  {% include "messageApp/list_messages.html" with message_list=message_list title="Inbox" %}
+
+{% else %}
+
+  <div class="container">
+
+    <div class="login-form">
+        <div class="row p-3">
+          <div class="class col-sm-6 offset-sm-3  mt-5 text-center p-4 border" style="">
+            <a href="{% url 'register' %}"> <button  class="btn btn-primary"> Register </button><br> </a>
+            <hr> <br>
+            <a href="{% url 'login' %}"> <button  class="btn btn-primary"> Login </button><br> </a>
+          </div>
+        </div>
+    </div>
+
+  </div>
+
+{% endif %}
+
+{% endblock %}
+
+<h1>Welcome To Home Page</h1>
+{% if user.is_authenticated %}
+  <p> <a href="{% url 'logout' %}">Logout</a></p>
+  <p> <a href="{% url 'list_user' %}">List User</a> </p>
+  <p> <a href="{% url 'create_message' %}">Create Message</a> </p>
+{% else %}
+  <p> <a href={% url 'register' %}> Register </a> </p>
+  <p> <a href="{% url 'login' %}"> Login </a> </p>
+{% endif %}
+
+{% if user.is_authenticated %}
+<hr>
+<h2>Recent Messages:</h2>
+{% for message in message_list %}
+  <p>{{message.message_body}}<br>
+    {{ message.created_at|date:"D d M Y" }} {{ message.created_at|time:"H:i" }} by <i>@{{message.sent_by.username}}</i>
+  </p>
+  <hr>
+{% endfor %}
+
+{% endif %}
