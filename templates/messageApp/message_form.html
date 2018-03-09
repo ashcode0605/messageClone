@@ -4,6 +4,10 @@
 {% bootstrap_javascript jquery='full' %}
 {% bootstrap_messages %}
 
+{% block head_block %}
+  {{form.media}}
+{% endblock %}
+
 {% block body_block %}
 
 <div class="container">

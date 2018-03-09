@@ -1,9 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-# Create your models here.
+from markdown_deux import markdown
+from django.utils.safestring import mark_safe
+from bs4 import BeautifulSoup
 
 class UserProfileInfo(models.Model):
+    """
+    Extra information realted to user
+    """
+
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='UserProfile')
     profile_pic = models.ImageField(upload_to="profile_pic/",blank=True)
 
@@ -25,6 +31,16 @@ class Message(models.Model):
 
     def __str__(self):
         return str(self.message_body)
+
+    def trucated_message(self):
+        html = self.marked_message()
+        text = ''.join(BeautifulSoup(html,"html.parser").findAll(text=True))
+        return text
+
+    def marked_message(self):
+        message = self.message_body
+        marked_content = markdown(message)
+        return mark_safe(marked_content)
 
     def get_absolute_url(self):
         return reverse('index')

@@ -1,16 +1,13 @@
 from django.shortcuts import render , get_object_or_404
-from . forms import UserForm,UserProfileInfoForm
+from . forms import UserForm,UserProfileInfoForm,MessageForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect,HttpResponseNotFound
-from django.views.generic import ListView,CreateView,TemplateView
+from django.views.generic import ListView,CreateView,TemplateView,DetailView
 from messageApp.models import UserProfileInfo,Message
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-# class Index(TemplateView):
-#     template_name = "index.html"
-
 
 def register(request):
 
@@ -58,12 +55,16 @@ class UserList(LoginRequiredMixin,ListView):
 class CreateMessage(LoginRequiredMixin,CreateView):
     login_url = 'login/'
     model = Message
-    fields = ['sent_to','message_body']
+    form_class = MessageForm
 
     def form_valid(self, form):
         form.instance.sent_by = self.request.user
         return super().form_valid(form)
 
+class MessageDetailView(LoginRequiredMixin,DetailView):
+    login_url = 'login/'
+    model = Message
+    
 
 class Index(ListView):
     template_name = 'index.html'

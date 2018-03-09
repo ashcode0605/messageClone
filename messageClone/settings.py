@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'messageApp',
     'bootstrap4',
+    'pagedown',
+    'markdown_deux',
 ]
 
 MIDDLEWARE = [

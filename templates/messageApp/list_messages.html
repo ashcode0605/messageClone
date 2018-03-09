@@ -22,10 +22,10 @@
         <div class="list-items">
           <ul class="list-group">
             {% for message in message_list %}
-              <li class="list-group-item">
-                <p>{{ message.message_body|truncatewords:3 }}</p>
+              <a class="nav-link" href="{%url 'message_detail' pk=message.id%}"><li class="list-group-item">
+                <p>{{ message.trucated_message|truncatewords:3 }}</p>
                 <p class="blockquote-footer"> <i>by {{message.sent_by}} | </i> {{ message.created_at|date:"D d M Y" }} </p>
-              </li>
+              </li></a>
             {% empty %}
               <p class="text-center">No items in {{title}}</p>
             {% endfor %}

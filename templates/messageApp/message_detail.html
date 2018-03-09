@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block extra_script %}
+
+  <script type="text/javascript">
+    $(".message_container img").each(function() {
+      $(this).addClass("img-fluid");
+    });
+  </script>
+
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+  <div class="row mt-4 p-3">
+
+    <div class="col-sm-3 p-3" style="border-right:3px solid black;">
+      <ul class="nav flex-column">
+        <li class="nav-item border">
+          <a class="nav-link" href='{% url 'index' %}'>Inbox</a>
+        </li>
+        <li class="nav-item border">
+          <a class="nav-link" href="{% url 'sent_items' %}">Sent Items</a>
+        </li>
+        <li class="nav-item border">
+          <a class="nav-link" href="#">Recent</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-sm-9 p-4 border-top">
+      <div class="container message_container text-center">
+        {{object.marked_message}}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

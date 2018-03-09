@@ -30,4 +30,5 @@ urlpatterns = [
     path('user/inbox/<int:pk>/',views.listMessages,name='list_message'),  ##Filter user by username
     path('user/create_message/',views.CreateMessage.as_view(),name='create_message'), ##Creating message
     path('user/sent_items/',views.SentItems.as_view(),name='sent_items'),
+    path('user/sent_items/<int:pk>/',views.MessageDetailView.as_view(),name='message_detail'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
