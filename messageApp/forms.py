@@ -16,7 +16,7 @@ class UserProfileInfoForm(forms.ModelForm):
         fields = ['profile_pic']
 
 class MessageForm(ModelForm):
-    message_body = forms.CharField(widget=PagedownWidget)
+    message_body = forms.CharField(widget=PagedownWidget(show_preview=False))
     class Meta:
         model = Message
         fields = ['sent_to','message_body']

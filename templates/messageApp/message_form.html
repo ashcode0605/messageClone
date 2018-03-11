@@ -8,11 +8,32 @@
   {{form.media}}
 {% endblock %}
 
+{% block extra_script %}
+  <script type="text/javascript">
+
+    $("#id_message_body").keyup(function() {
+      var marked_content = marked($(this).val());
+      $("#preview-content").html(marked_content);
+      $("#preview-content img").each(function() {
+        $(this).addClass("img-fluid")
+      })
+    });
+
+  </script>
+{% endblock %}
+
 {% block body_block %}
 
 <div class="container">
     <div class="row">
-      <div class="col-sm-6 offset-sm-3 mt-5">
+      <div class="col-sm-6 mt-5">
+        <h3>Preview</h3>
+        <hr>
+        <div id="preview-content">
+
+        </div>
+      </div>
+      <div class="col-sm-6 mt-5">
 
         <h3 class="text-center">Compose</h3>
         <hr>
