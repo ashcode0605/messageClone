@@ -6,6 +6,7 @@ This is message system web app developed for practice.
 * Bootstrap4
 * HTML/CSS
 * Jquery
+* Django REST Framework
 
 
 
