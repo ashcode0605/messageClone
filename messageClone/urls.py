@@ -14,14 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from messageApp import views
 from django.contrib.auth.views import LoginView,LogoutView
 from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls')),
     path('',views.Index.as_view(),name='index'),
     path('register/',views.register,name='register'),
     path('login/',LoginView.as_view(template_name='messageApp/login.html'),name='login'),
@@ -31,4 +33,5 @@ urlpatterns = [
     path('user/create_message/',views.CreateMessage.as_view(),name='create_message'), ##Creating message
     path('user/sent_items/',views.SentItems.as_view(),name='sent_items'),
     path('user/sent_items/<int:pk>/',views.MessageDetailView.as_view(),name='message_detail'),
+    path('api/',include("messageApp.api.urls",namespace='api'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

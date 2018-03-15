@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'pagedown',
     'markdown_deux',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

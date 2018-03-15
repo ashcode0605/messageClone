@@ -12,7 +12,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def register(request):
 
     if request.method == 'POST':
-
         userform = UserForm(data = request.POST)
         userprofileform = UserProfileInfoForm(request.POST,request.FILES)
 
@@ -64,7 +63,7 @@ class CreateMessage(LoginRequiredMixin,CreateView):
 class MessageDetailView(LoginRequiredMixin,DetailView):
     login_url = 'login/'
     model = Message
-    
+
 
 class Index(ListView):
     template_name = 'index.html'
